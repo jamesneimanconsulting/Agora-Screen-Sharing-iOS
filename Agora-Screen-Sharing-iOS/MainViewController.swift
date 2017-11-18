@@ -25,6 +25,16 @@ class MainViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Used to trigger the allowing network dialog when first run, only for cellphones sold in China
+        let url = URL(string: "https://www.agora.io")
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
+        let dataTask = session.dataTask(with: url!)
+        dataTask.resume()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -54,7 +64,8 @@ private extension MainViewController {
         RPScreenRecorder.shared().isMicrophoneEnabled = true
         
         // Broadcast Pairing
-        RPBroadcastActivityViewController.load(withPreferredExtension: "io.agora.Agora-Screen-Sharing-iOS.BroadcastUI") { (broadcastActivityViewController, _) in
+        let bundleID = Bundle.main.bundleIdentifier!
+        RPBroadcastActivityViewController.load(withPreferredExtension: bundleID + ".BroadcastUI") { (broadcastActivityViewController, _) in
             self.presentBroadcastActivityVC(broadcastActivityVC: broadcastActivityViewController)
         }
     }
