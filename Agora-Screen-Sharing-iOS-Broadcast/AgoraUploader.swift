@@ -11,7 +11,7 @@ import CoreMedia
 
 class AgoraUploader {
     private static let sharedAgoraEngine: AgoraRtcEngineKit = {
-        let kit = AgoraRtcEngineKit.sharedEngine(withAppId: KeyCenter.AppId, delegate: nil)!
+        let kit = AgoraRtcEngineKit.sharedEngine(withAppId: KeyCenter.AppId, delegate: nil)
         kit.setParameters("{\"che.hardware_encoding\":0}")
         kit.setChannelProfile(.channelProfile_LiveBroadcasting)
         kit.setExternalVideoSource(true, useTexture: true, pushMode: true)

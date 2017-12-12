@@ -33,6 +33,7 @@
 		07AA91AB1F308E85006AF490 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AA91AA1F308E85006AF490 /* CoreMedia.framework */; };
 		07AA91AD1F308E8E006AF490 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AA91AC1F308E8E006AF490 /* libc++.tbd */; };
 		702385401F974CD400AC60AA /* KeyCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A67FDD1F3073CD0051AD0D /* KeyCenter.swift */; };
+		70AE340D1FDFBCC000B05F34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70AE340C1FDFBCC000B05F34 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		07AA91A81F308E78006AF490 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		07AA91AA1F308E85006AF490 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		07AA91AC1F308E8E006AF490 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		70AE340C1FDFBCC000B05F34 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				074843A21F976DC300AA7804 /* AgoraRtcEngineKit.framework in Frameworks */,
+				70AE340D1FDFBCC000B05F34 /* SystemConfiguration.framework in Frameworks */,
 				07AA91AD1F308E8E006AF490 /* libc++.tbd in Frameworks */,
 				07AA91AB1F308E85006AF490 /* CoreMedia.framework in Frameworks */,
 				07AA91A91F308E78006AF490 /* AVFoundation.framework in Frameworks */,
@@ -177,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				074843971F97672900AA7804 /* libstdc++.tbd */,
+				70AE340C1FDFBCC000B05F34 /* SystemConfiguration.framework */,
 				07AA91AC1F308E8E006AF490 /* libc++.tbd */,
 				07AA91AA1F308E85006AF490 /* CoreMedia.framework */,
 				07AA91A81F308E78006AF490 /* AVFoundation.framework */,
