@@ -149,7 +149,7 @@ static AgoraAudioFrameObserver s_audioFrameObserver;
 + (void)pushAudioAppBuffer:(CMSampleBufferRef)sampleBuffer
 {
     AudioBufferList inAudioBufferList;
-    CMBlockBufferRef blockBuffer;
+    CMBlockBufferRef blockBuffer = nil;
     CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &inAudioBufferList, sizeof(inAudioBufferList), NULL, NULL, 0, &blockBuffer);
     
     AudioBuffer buffer = inAudioBufferList.mBuffers[0];
@@ -171,7 +171,7 @@ static AgoraAudioFrameObserver s_audioFrameObserver;
 + (void)pushAudioMicBuffer:(CMSampleBufferRef)sampleBuffer
 {
     AudioBufferList inAaudioBufferList;
-    CMBlockBufferRef blockBuffer;
+    CMBlockBufferRef blockBuffer = nil;
     CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &inAaudioBufferList, sizeof(inAaudioBufferList), NULL, NULL, 0, &blockBuffer);
     
     AudioBuffer buffer = inAaudioBufferList.mBuffers[0];
