@@ -10,24 +10,57 @@ import Foundation
 import CoreMedia
 
 class AgoraUploader {
+    private static let videoResolution : CGSize = {
+        let width : CGFloat
+        let height : CGFloat
+        let screenSize = UIScreen.main.currentMode!.size
+        if screenSize.width <= screenSize.height {
+            if screenSize.width * 16 <= screenSize.height * 9 {
+                width = 640 * screenSize.width / screenSize.height
+                height = 640
+            }
+            else {
+                width = 360
+                height = 360 * screenSize.height / screenSize.width
+            }
+        }
+        else {
+            if screenSize.width * 9 <= screenSize.height * 16 {
+                width = 360 * screenSize.width / screenSize.height
+                height = 360
+            }
+            else {
+                width = 640
+                height = 640 * screenSize.height / screenSize.width
+            }
+        }
+        
+        return CGSize(width: width, height: height)
+    }()
+    
     private static let sharedAgoraEngine: AgoraRtcEngineKit = {
         let kit = AgoraRtcEngineKit.sharedEngine(withAppId: KeyCenter.AppId, delegate: nil)
-        kit.setParameters("{\"che.hardware_encoding\":0}")
-        kit.setChannelProfile(.channelProfile_LiveBroadcasting)
-        kit.setExternalVideoSource(true, useTexture: true, pushMode: true)
+        kit.setChannelProfile(.liveBroadcasting)
+        kit.setClientRole(.broadcaster)
         
         kit.enableVideo()
-        kit.setVideoProfile(._VideoProfile_DEFAULT, swapWidthAndHeight: true)
-        kit.setClientRole(.clientRole_Broadcaster, withKey: nil)
+        kit.setExternalVideoSource(true, useTexture: true, pushMode: true)
+        kit.setVideoResolution(videoResolution, andFrameRate:15, bitrate:400)
+        kit.setParameters("{\"che.hardware_encoding\":0}")
+        kit.setParameters("{\"che.video.compact_memory\":true}")
         
         AgoraAudioProcessing.registerAudioPreprocessing(kit)
-        kit.setRecordingAudioFrameParametersWithSampleRate(44100, channel: 1, mode: .rawAudioFrame_OpMode_ReadWrite, samplesPerCall: 1024)
+        kit.setRecordingAudioFrameParametersWithSampleRate(44100, channel: 1, mode: .readWrite, samplesPerCall: 1024)
         kit.setParameters("{\"che.audio.external_device\":true}")
+        
+        kit.muteAllRemoteVideoStreams(true)
+        kit.muteAllRemoteAudioStreams(true)
+        
         return kit
     }()
     
     static func startBroadcast(to channel: String) {
-        sharedAgoraEngine.joinChannel(byKey: nil, channelName: channel, info: nil, uid: 0, joinSuccess: nil)
+        sharedAgoraEngine.joinChannel(byToken: nil, channelId: channel, info: nil, uid: 0, joinSuccess: nil)
     }
     
     static func sendVideoBuffer(_ sampleBuffer: CMSampleBuffer) {
