@@ -126,7 +126,7 @@ static AgoraAudioFrameObserver s_audioFrameObserver;
     
     agora::rtc::IRtcEngine* rtc_engine = (agora::rtc::IRtcEngine*)kit.getNativeHandle;
     agora::util::AutoPtr<agora::media::IMediaEngine> mediaEngine;
-    mediaEngine.queryInterface(rtc_engine, agora::rtc::AGORA_IID_MEDIA_ENGINE);
+    mediaEngine.queryInterface(rtc_engine, agora::AGORA_IID_MEDIA_ENGINE);
     if (mediaEngine) {
         mediaEngine->registerAudioFrameObserver(&s_audioFrameObserver);
     }
@@ -140,7 +140,7 @@ static AgoraAudioFrameObserver s_audioFrameObserver;
     
     agora::rtc::IRtcEngine* rtc_engine = (agora::rtc::IRtcEngine*)kit.getNativeHandle;
     agora::util::AutoPtr<agora::media::IMediaEngine> mediaEngine;
-    mediaEngine.queryInterface(rtc_engine, agora::rtc::AGORA_IID_MEDIA_ENGINE);
+    mediaEngine.queryInterface(rtc_engine, agora::AGORA_IID_MEDIA_ENGINE);
     if (mediaEngine) {
         mediaEngine->registerAudioFrameObserver(NULL);
     }
