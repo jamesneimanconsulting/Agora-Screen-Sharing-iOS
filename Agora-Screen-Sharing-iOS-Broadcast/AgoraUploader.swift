@@ -46,7 +46,11 @@ class AgoraUploader {
         kit.enableVideo()
         kit.setExternalVideoSource(true, useTexture: true, pushMode: true)
         kit.setVideoResolution(videoResolution, andFrameRate:15, bitrate:400)
+        
+        // disable hardware encoding, as extension can not access the hardware
         kit.setParameters("{\"che.hardware_encoding\":0}")
+        
+        // enable compact memory mode, as extension has a memory limit to 50M
         kit.setParameters("{\"che.video.compact_memory\":true}")
         
         AgoraAudioProcessing.registerAudioPreprocessing(kit)
