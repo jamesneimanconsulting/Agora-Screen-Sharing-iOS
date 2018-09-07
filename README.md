@@ -4,8 +4,8 @@ This tutorial describes how to add screensharing to your iOS applications using 
 
 With this sample app, you can:
 
-- [Start / Stop Broadcast](#start-stop-broadcast)
-- [Start](#start-screenshare) / [Stop](#start-screenshare) Screensharing
+- [Start or Stop Broadcast](#start-or-stop-broadcast)
+- [Start](#start-screenshare) or [Stop](#start-screenshare) Screensharing
 
 ## Prerequisites
 - Xcode 9.0+
@@ -39,7 +39,7 @@ To build and run the sample application, you must obtain an app ID:
 
 2. Download the [Agora Video SDK](https://www.agora.io/en/download/). Unzip the downloaded SDK package and copy the `libs/AograRtcEngineKit.framework` file from the SDK folder into the sample application's `Agora-Screen-Sharing-iOS-Broadcast` folder.
 			
-3. Connect your iPhone or iPad device and run the project. Ensure a valid provisioning profile is applied or your project will not run.
+3. Connect your iPhone or iPad device and run the project. Ensure a valid provisioning profile is applied, or your project will not run.
 
 ## Steps to Create the Sample 
 
@@ -137,9 +137,9 @@ private extension BroadcastViewController {
 
 The `userStartBroadcast()` method starts the broadcast setup.
 
-1. Ensure `channel` is not empty
+1. Ensure `channel` is not empty.
 2. Declare `setupInfo` with the `channelName ` information.
-3. Initiate the broadcast with `setupInfo` using `extensionContext.completeRequest()`
+3. Initiate the broadcast with `setupInfo` using `extensionContext.completeRequest()`.
 
 ``` Swift    
     func userStartBroadcast(withChannel channel: String?) {
@@ -250,8 +250,8 @@ Landscape|Low resolution|`360 * screenSize.width / screenSize.height`|`360`
 
 **Notes:**
 
-- Portrait orientation is determined by the screen's `width` being less than the `height`. Otherwise the orientation is landscape mode.
-- High resolution is determined by the screen's shortest side multiplied by `16` being less than the screen's longest side multiplied by `9`. Otherwise the the resolution is considered low
+- Portrait orientation is determined by the screen's `width` being less than the `height`. Otherwise, the orientation is landscape mode.
+- High resolution is determined by the screen's shortest side multiplied by `16` being less than the screen's longest side multiplied by `9`. Otherwise, the resolution is considered low.
 
 ``` Swift
         if screenSize.width <= screenSize.height {
@@ -351,7 +351,7 @@ Complete the method by returning `kit`.
 
 The `AgoraUploader` methods start/stop broadcasts and send video and audio buffers to the Agora engine.
 
-###### Start / Stop Broadcast
+###### Start or Stop Broadcast
 
 The `startBroadcast()` method joins the user to the specified `channel` using `sharedAgoraEngine.joinChannel()`.
 
@@ -371,14 +371,14 @@ The `stopBroadcast()` method removes the user from the channel using `sharedAgor
     }
 ```
 
-###### Send Video / Audio Buffer
+###### Send Video or Audio Buffer
 
 The `sendVideoBuffer()` method pushes the video frame to the Agora engine.
 
-1. Retrieve the video frame buffer using `CMSampleBufferGetImageBuffer()` and ensure the value is valie
-2. Retrieve the timestamp for the buffer using `CMSampleBufferGetPresentationTimeStamp()`
+1. Retrieve the video frame buffer using `CMSampleBufferGetImageBuffer()` and ensure the value is valid.
+2. Retrieve the timestamp for the buffer using `CMSampleBufferGetPresentationTimeStamp()`.
 3. Intialize `frame` using `AgoraVideoFrame()` and set the `format`, `time`, and `textureBuf` values.
-4. Push the video frame to the Agora engine using `sharedAgoraEngine.pushExternalVideoFrame()`
+4. Push the video frame to the Agora engine using `sharedAgoraEngine.pushExternalVideoFrame()`.
 
 ``` Swift
     static func sendVideoBuffer(_ sampleBuffer: CMSampleBuffer) {
@@ -433,8 +433,8 @@ The `broadcastStarted()` method starts the broadcast.
 
 Check if the `channelName` for `setupInfo` is null.
 
-- If the `channelName` is not null and start the broadcast with `channel` using `AgoraUploader.startBroadcast()`
-- If the `channelName` is null and start the broadcast with the static string `channel` using `AgoraUploader.startBroadcast()`
+- If the `channelName` is not null, start the broadcast with `channel` using `AgoraUploader.startBroadcast()`.
+- If the `channelName` is null, start the broadcast with the static string `channel` using `AgoraUploader.startBroadcast()`.
 
 ``` Swift
     override func broadcastStarted(withSetupInfo setupInfo: [String : NSObject]?) {
@@ -530,7 +530,7 @@ Add the following assets to `Assets.xcassets`.
 
 Asset|Description
 ------|------
-`btn_join` and `btn_broadcasting`|Images of a camera to join / leave a call
+`btn_join` and `btn_broadcasting`|Images of a camera to join or leave a call
 `dust`|An image of a circle, representing a dust particle
 `spaceship`|An image of a spaceship
 `star`|An image of a yellow star
@@ -546,7 +546,7 @@ The layout for the `MainViewController` contains an `SKView` and Broadcast `UIBu
 - [Define the MainViewController Global Variables](#define-the-mainviewcontroller-global-variables)
 - [Create the MainViewController Methods](#create-the-mainviewcontroller-methods)
 - [Create the MainViewController Extension Methods](#create-the-mainviewcontroller-extension-methods)
-- [Create MainViewController Delegate](#create-the-mainviewcontroller-delegate)
+- [Create the MainViewController Delegate](#create-the-mainviewcontroller-delegate)
 
 ##### Define the MainViewController Global Variables
 
@@ -573,7 +573,7 @@ class MainViewController: UIViewController {
 }
 ```
 
-Three of private variables are declared as `fileprivate weak`.
+Three private variables are declared as `fileprivate weak`.
 
 Variable|Object Type|Description
 ---|---|---
@@ -599,9 +599,9 @@ The `isBroadcasting` private variable is initialized to `false`. When the value 
 
 ##### Create the MainViewController Methods
 
-The `viewWillAppear()` method triggers when the view is about to renders on the screen.
+The `viewWillAppear()` method triggers when the view is about to render on the screen.
 
-After invoking the superview's `viewWillAppear()` method, create a `URLSession` object and associated `dataTask` with the `https://www.agora.io` url.
+After invoking the superview's `viewWillAppear()` method, create a `URLSession` object and associated `dataTask` with the `https://www.agora.io` URL.
 
 Resume the task using `dataTask.resume()`.
 
@@ -637,7 +637,7 @@ The `doBroadcastPressed()` method is triggered when `broadcastButton` is pressed
 
 Toggle the `isBroadcasting` value. 
 
-If `isBroadcasting` is `true`, start broadcasting using `startReplayKitBroadcasting()` otherwise stop broadcasting using `stopReplayKitBroadcasting()`.
+If `isBroadcasting` is `true`, start broadcasting using `startReplayKitBroadcasting()`. Otherwise, stop broadcasting using `stopReplayKitBroadcasting()`.
 
 ``` Swift    
     @IBAction func doBroadcastPressed(_ sender: UIButton) {
@@ -665,7 +665,7 @@ private extension MainViewController {
 
 ###### Start Screenshare
 
-The `startReplayKitBroadcasting()` begins the broadcast / screenshare.
+The `startReplayKitBroadcasting()` begins the broadcast or screenshare.
 
 Ensure screensharing is available using `RPScreenRecorder.shared().isAvailable` and enable the camera and microphone using `RPScreenRecorder.shared().isCameraEnabled` and `RPScreenRecorder.shared().isMicrophoneEnabled`.
 
@@ -706,12 +706,12 @@ Ensure `broadcastActivityVC` is valid and set its `delegate` to `self`.
     }
 ```
 
-If the device is an iPad, set the `broadcastActivityVC.modalPresentationStyle` to `.popover` as well as the following parameters for `broadcastActivityVC.popoverPresentationController`
+If the device is an iPad, set the `broadcastActivityVC.modalPresentationStyle` to `.popover` as well as the following parameters for `broadcastActivityVC.popoverPresentationController`.
 
 Parameter|Value|Description
 ---|---|---
 `sourceView`|`broadcastButton`|Displays the popover from the broadcast button
-`sourceRect`|`broadcastButton.frame`|Sets the source size to the the broadcast button size
+`sourceRect`|`broadcastButton.frame`|Sets the source size to the broadcast button size
 `permittedArrowDirections`|`.down`|Displays the popover in the down direction from the broadcast button
 
 
@@ -734,7 +734,7 @@ Display the broadcast activity view using `present()` and update `self.broadcast
 
 ###### Stop Screenshare
 
-The `stopReplayKitBroadcasting()` method stops the broadcast / screenshare.
+The `stopReplayKitBroadcasting()` method stops the broadcast or screenshare.
 
 Ensure `broadcastController` is valid and invoke `broadcastController.finishBroadcast()`.
 
@@ -754,7 +754,7 @@ If `cameraPreview` is valid, remove it from the superview using `cameraPreview.r
     }
 ```
 
-#### Create MainViewController Delegate
+#### Create the MainViewController Delegate
 
 The delegate method for `MainViewController` is contained in a separate `extension` declaration.
 
@@ -783,12 +783,12 @@ Ensure `self.broadcastActivityVC` is valid before dismissing it using `broadcast
 
 Update `self.broadcastController` and ensure its value is valid before starting the broadcast using `broadcastController.startBroadcast()`.
 
-If starting the broadcast generates and error, print a debug log for the `error` using `print`. Otherwise, asynchronously:
+If starting the broadcast generates an error, print a debug log for the `error` using `print`. Otherwise, asynchronously:
 
-- Ensure `RPScreenRecorder.shared().cameraPreviewView` is valid
-- Update the `cameraPreview.frame`
-- Add `cameraPreview` to the view using `self.view.addSubview()`
-- Update `self.cameraPreview`
+- Ensure `RPScreenRecorder.shared().cameraPreviewView` is valid.
+- Update the `cameraPreview.frame`.
+- Add `cameraPreview` to the view using `self.view.addSubview()`.
+- Update `self.cameraPreview`.
 
 ``` Swift    
             self.broadcastController = broadcastController
@@ -855,7 +855,7 @@ func / (point: CGPoint, scalar: CGFloat) -> CGPoint {
 
 ###### Square-root Calculation
 
-The `sqrt()` method calculates the square root of a `CGFloat` specified by `a`
+The `sqrt()` method calculates the square root of a `CGFloat` specified by `a`.
 
 ``` Swift
 #if !(arch(x86_64) || arch(arm64))
@@ -881,7 +881,7 @@ extension CGPoint {
 }
 ```
 
-##### Create the GameScene Variable and Methods
+##### Create the GameScene Variable Methods
 
 The `GameScene` class is a subclass of `SKScene`.
 
@@ -960,7 +960,7 @@ Initialize a dust particle using `SKSpriteNode()` which references the `dust` im
 
 Set `actualX` to a random value between `dust.size.width / 2` and `size.width - dust.size.width / 2` using `random()`.
 
-Set `dust.position` to  the bottom of the screen with the x position of `actualX` and set `dust.zPosition` to `-2`.
+Set `dust.position` to the bottom of the screen with the x position of `actualX` and set `dust.zPosition` to `-2`.
 
 Add the `dust` particle using `addChild`.
 
